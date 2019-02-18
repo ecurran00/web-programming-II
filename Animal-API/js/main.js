@@ -3,11 +3,13 @@ var animalContainer = document.getElementById("animal-info");
 var btn = document.getElementById("btn");
 
 btn.addEventListener("click", function() {
+  // From LG: FYI new XMLHttpRequest() is JavaScript - you can also use $.ajax() or $.getJSON() with jQuery – see exercise files	
   var ourRequest = new XMLHttpRequest();
   ourRequest.open('GET', 'https://learnwebcode.github.io/json-example/animals-' + pageCounter + '.json');
   ourRequest.onload = function() {
     if (ourRequest.status >= 200 && ourRequest.status < 400) {
       var ourData = JSON.parse(ourRequest.responseText);
+      console.log(ourData);
       renderHTML(ourData);
     } else {
       console.log("We connected to the server, but it returned an error.");
@@ -54,5 +56,9 @@ function renderHTML(data) {
 
   }
 
-  animalContainer.insertAdjacentHTML('beforeend', htmlString);
+  	// From LG: To update 3 cats returned on click, you can use .innerHTML instead of insertAdjacentHTML
+  	// These are all JavaScript commands, in jQuery you would use .html() to update
+  	animalContainer.innerHTML = htmlString;
+  	
+  	// animalContainer.insertAdjacentHTML('beforeend', htmlString);
 }
